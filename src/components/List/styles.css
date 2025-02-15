@@ -1,0 +1,138 @@
+.container {
+    max-width: 50%;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    padding: 16px;
+    background-color: #22243d;
+    color: #fff;
+    margin: auto;
+
+    h1 {
+        border-bottom: 1px solid #e0e0e0;
+        padding-bottom: 16px;
+    }
+}
+
+.radioContainer {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.radioContainer.isComplete {
+    color: #E0E0E0;
+    text-decoration: line-through;
+}
+
+.radioContainer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+}
+
+.radioContainer:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.radioContainer input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.radioContainer input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.radioContainer .checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.addNewContainer {
+    display: flex;
+    margin: 24px 0 16px;
+
+    input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #E0E0E0;
+        border-radius: 8px;
+    }
+
+    button {
+        width: 100px;
+        background: rgb(51, 103, 142);
+        color: #fff;
+        font-weight: 800;
+        border: none;
+        border-radius: 8px;
+        margin-left: 8px;
+        cursor: pointer;
+    }
+}
+
+.filterGroup {
+    display: flex;
+    margin-bottom: 32px;
+
+    select {
+        width: 150px;
+        padding: 4px;
+        margin-left: 4px;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+    }
+}
+
+.filterMenu {
+    margin-right: 16px;
+}
+
+.listBox {
+    border: 1px solid #303359;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 16px;
+    background-color: #303359;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+
+    &:hover {
+        opacity: .7;
+    }
+}
+
+.deleteButton {
+    cursor: pointer;
+}
