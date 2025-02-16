@@ -1,29 +1,24 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './styles.css';
 
-const mockData = [{
-    id: 0,
-    isComplete: false,
-    description: 'create landing page 1',
-},
-{
-    id: 1,
-    isComplete: false,
-    description: 'create landing page 2',
-},
-{
-    id: 2,
-    isComplete: false,
-    description: 'create landing page 3',
-}]
-
 function List() {
-    const [listData, setListData] = useState(mockData);
+    const [listData, setListData] = useState([]);
     const [inputTodoValue, setInputTodoValue] = useState('');
     const [selectedFilter, setSelectedFilter] = useState(1);
     const [selectedSort, setSelectedSort] = useState(1);
     const [finalList, setFinalList] = useState(listData);
-    
+    const refGetFirstData = useRef(false);
+
+    useEffect(() => {
+        if (!refGetFirstData.current) {
+            const getMockData = localStorage.getItem("my-todo-list" || []);
+            const parseJson = JSON.parse(getMockData);
+            setListData(parseJson || []);
+            setFinalList(parseJson || []);
+            refGetFirstData.current = true;
+        }
+    }, [refGetFirstData, setListData])
+        
     const onChangeCheckBox = (data) => {
         const updatedData = listData.map(item => {
             if (item.id === data.id) {
@@ -49,6 +44,7 @@ function List() {
 
         setListData(updatedData);
         setFinalList(updatedFilterData);
+        localStorage.setItem("my-todo-list", JSON.stringify(updatedData));
     }
 
     const handleDeleteList = (id) => {
@@ -57,6 +53,7 @@ function List() {
 
         setListData(deleteList);
         setFinalList(deleteFinalList);
+        localStorage.setItem("my-todo-list", JSON.stringify(deleteList));
     }
 
     const listItem = () => {
@@ -94,6 +91,7 @@ function List() {
         setListData(updateTodoList);
         setFinalList(updateFinalList);
         setInputTodoValue('');
+        localStorage.setItem("my-todo-list", JSON.stringify(updateTodoList));
     }
 
     const addNewTodo = () => {
